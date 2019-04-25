@@ -8,28 +8,28 @@ class FizzBuzz {
     IntStream.range(1, 100).forEach(i -> System.out.println(FizzBuzz.of(i)));
   }
 
-  static String of(int input) {
-    if (isFizzBuzz(input)) {
+  static String of(int number) {
+    if (isFizzBuzz(number)) {
       return "FizzBuzz";
     }
-    if (isFizz(input)) {
+    if (isFizz(number)) {
       return "Fizz";
     }
-    if (isBuzz(input)) {
+    if (isBuzz(number)) {
       return "Buzz";
     }
-    return String.valueOf(input);
+    return String.valueOf(number);
   }
 
-  private static boolean isFizzBuzz(int input) {
-    return isFizz(input) && isBuzz(input);
+  private static boolean isFizzBuzz(int number) {
+    return isFizz(number) && isBuzz(number);
   }
 
-  private static boolean isBuzz(int input) {
-    return input % 5 == 0 || String.valueOf(input).contains("5");
+  private static boolean isBuzz(int number) {
+    return number % 5 == 0 || String.valueOf(number).contains("5");
   }
 
-  private static boolean isFizz(int input) {
-    return input % 3 == 0 || String.valueOf(input).contains("3");
+  private static boolean isFizz(int number) {
+    return number % 3 == 0 || String.valueOf(number).contains("3");
   }
 }
