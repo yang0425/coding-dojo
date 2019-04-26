@@ -16,11 +16,17 @@ public class Args {
   }
 
   String parse(String command) {
-    if (null != command && command.startsWith("-")) {
-      String currentCommand = command.substring(1);
-      argItemMap.get(currentCommand).setValue(null);
-    }
+    Command c = new Command(command);
+    calculateCommand(c);
     return argItemMap.values().stream().map(ArgItem::toString).collect(joining(", "));
+  }
+
+  private void calculateCommand(Command command) {
+    if (command.hasNext()) {
+      String flag = command.getFlag();
+      argItemMap.get(flag).setValue(command);
+      calculateCommand(command);
+    }
   }
 
   private void addArgItem(String itemSchema) {

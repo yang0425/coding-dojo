@@ -2,6 +2,6 @@ package dojo.coding.args;
 
 interface ArgItem {
 
-  void setValue(String value);
+  void setValue(Command command);
 
 }

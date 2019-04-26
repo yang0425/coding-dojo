@@ -10,8 +10,8 @@ public class IntArgItem implements ArgItem {
   }
 
   @Override
-  public void setValue(String value) {
-    this.value = Integer.valueOf(value);
+  public void setValue(Command command) {
+    this.value = Integer.valueOf(command.getValue());
   }
 
   @Override

@@ -10,7 +10,7 @@ public class BooleanArgItem implements ArgItem {
   }
 
   @Override
-  public void setValue(String value) {
+  public void setValue(Command command) {
     this.value = true;
   }
 

@@ -19,6 +19,7 @@ class ArgsTest {
   @CsvSource({
       "'logging: false, port: 0, directory: ',",
       "'logging: true, port: 0, directory: ',-l",
+      "'logging: false, port: 8080, directory: ',-p 8080",
   })
   void should_parse_commands(String expected, String command) {
     assertEquals(expected, args.parse(command));
