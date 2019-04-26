@@ -16,15 +16,13 @@ public class Args {
   }
 
   String parse(String command) {
-    Command c = new Command(command);
-    calculateCommand(c);
+    calculateCommand(new Command(command));
     return argItemMap.values().stream().map(ArgItem::toString).collect(joining(", "));
   }
 
   private void calculateCommand(Command command) {
     if (command.hasNext()) {
-      String flag = command.getFlag();
-      argItemMap.get(flag).setValue(command);
+      argItemMap.get(command.getFlag()).setValue(command);
       calculateCommand(command);
     }
   }
