@@ -1,5 +1,6 @@
 package dojo.coding.args;
 
+import dojo.coding.args.exception.InvalidCommandException;
 import dojo.coding.args.exception.InvalidFlagException;
 import dojo.coding.args.exception.InvalidParameterException;
 import org.junit.jupiter.api.BeforeEach;
@@ -48,5 +49,11 @@ class ArgsTest {
   void should_throw_invalid_flag_exception() {
     InvalidFlagException exception = assertThrows(InvalidFlagException.class, () -> args.parse("-s"));
     assertEquals("the flag 's' is not supported.", exception.getMessage());
+  }
+
+  @Test
+  void should_throw_invalid_command_exception() {
+    InvalidCommandException exception = assertThrows(InvalidCommandException.class, () -> args.parse("l"));
+    assertEquals("command must start with -{flag}", exception.getMessage());
   }
 }

@@ -1,5 +1,6 @@
 package dojo.coding.args;
 
+import dojo.coding.args.exception.InvalidCommandException;
 import dojo.coding.args.exception.InvalidFlagException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,6 +15,9 @@ public class Command {
   public Command(String value, Map<String, ArgItem> argItemMap) {
     this.argItemMap = argItemMap;
     if (null != value) {
+      if (!value.startsWith("-")) {
+        throw new InvalidCommandException("command must start with -{flag}");
+      }
       args.addAll(Arrays.asList(value.split(" ")));
     }
   }
