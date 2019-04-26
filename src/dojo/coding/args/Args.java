@@ -16,15 +16,8 @@ public class Args {
   }
 
   String parse(String command) {
-    calculateCommand(new Command(command));
+    new Command(command, argItemMap).calculate();
     return argItemMap.values().stream().map(ArgItem::toString).collect(joining(", "));
-  }
-
-  private void calculateCommand(Command command) {
-    if (command.hasNext()) {
-      argItemMap.get(command.getFlag()).setValue(command);
-      calculateCommand(command);
-    }
   }
 
   private void addArgItem(String itemSchema) {
@@ -33,13 +26,13 @@ public class Args {
     String name = items[0];
     switch (items[2]) {
       case "int":
-        argItemMap.put(flag, new IntArgItem(name));
+        argItemMap.put(flag, new IntArgItem(name, flag));
         break;
       case "string":
-        argItemMap.put(flag, new StringArgItem(name));
+        argItemMap.put(flag, new StringArgItem(name, flag));
         break;
       case "bool":
-        argItemMap.put(flag, new BooleanArgItem(name));
+        argItemMap.put(flag, new BooleanArgItem(name, flag));
         break;
       default:
         throw new UnsupportedTypeException();

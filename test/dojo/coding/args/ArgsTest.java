@@ -1,10 +1,12 @@
 package dojo.coding.args;
 
+import dojo.coding.args.exception.InvalidParameterException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ArgsTest {
 
@@ -26,5 +28,14 @@ class ArgsTest {
   })
   void should_parse_commands(String expected, String command) {
     assertEquals(expected, args.parse(command));
+  }
+
+  @ParameterizedTest
+  @CsvSource({
+      "the flag 'l' should not has any parameters after it.,-l a"
+  })
+  void should_throw_invalid_parameter_exception(String expected, String command) {
+    InvalidParameterException exception = assertThrows(InvalidParameterException.class, () -> args.parse(command));
+    assertEquals(expected, exception.getMessage());
   }
 }
