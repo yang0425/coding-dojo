@@ -1,7 +1,9 @@
 package dojo.coding.args;
 
+import dojo.coding.args.exception.InvalidFlagException;
 import dojo.coding.args.exception.InvalidParameterException;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -40,5 +42,11 @@ class ArgsTest {
   void should_throw_invalid_parameter_exception(String expected, String command) {
     InvalidParameterException exception = assertThrows(InvalidParameterException.class, () -> args.parse(command));
     assertEquals(expected, exception.getMessage());
+  }
+
+  @Test
+  void should_throw_invalid_flag_exception() {
+    InvalidFlagException exception = assertThrows(InvalidFlagException.class, () -> args.parse("-s"));
+    assertEquals("the flag 's' is not supported.", exception.getMessage());
   }
 }

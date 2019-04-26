@@ -1,5 +1,6 @@
 package dojo.coding.args;
 
+import dojo.coding.args.exception.InvalidFlagException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,13 +20,13 @@ public class Command {
 
   void calculate() {
     if (hasNext()) {
-      argItemMap.get(consumeFlag()).setValue(this);
+      String flag = consumeFlag();
+      if (!argItemMap.containsKey(flag)) {
+        throw new InvalidFlagException(String.format("the flag '%s' is not supported.", flag));
+      }
+      argItemMap.get(flag).setValue(this);
       calculate();
     }
-  }
-
-  private String consumeFlag() {
-    return args.remove(0).replaceFirst("-", "");
   }
 
   String consumeValue() {
@@ -42,5 +43,9 @@ public class Command {
 
   boolean hasNext() {
     return args.size() > 0;
+  }
+
+  private String consumeFlag() {
+    return args.remove(0).replaceFirst("-", "");
   }
 }
