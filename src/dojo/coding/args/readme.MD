@@ -47,10 +47,6 @@ result: InvalidParameterException -> the flag 'p' should has a int parameter aft
 command: -d
 result: InvalidParameterException -> the flag 'd' should has a string parameter after it.
 ```
-```
-command: -d 8080
-result: InvalidParameterException -> the flag 'd' should has a string parameter after it.
-```
 ## Invalid Flag Exception
 ```
 command: -s

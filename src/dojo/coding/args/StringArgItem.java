@@ -1,5 +1,7 @@
 package dojo.coding.args;
 
+import dojo.coding.args.exception.InvalidParameterException;
+
 public class StringArgItem implements ArgItem {
 
   private String name;
@@ -13,7 +15,10 @@ public class StringArgItem implements ArgItem {
 
   @Override
   public void setValue(Command command) {
-    this.value = command.consumeValue();
+    if (command.hasNext()) {
+      this.value = command.consumeValue();
+    }
+    throw new InvalidParameterException(String.format("the flag '%s' should has a string parameter after it.", flag));
   }
 
   @Override

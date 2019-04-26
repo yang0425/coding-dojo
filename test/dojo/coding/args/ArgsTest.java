@@ -32,7 +32,10 @@ class ArgsTest {
 
   @ParameterizedTest
   @CsvSource({
-      "the flag 'l' should not has any parameters after it.,-l a"
+      "the flag 'l' should not has any parameters after it.,-l a",
+      "the flag 'p' should has a int parameter after it.,-p",
+      "the flag 'p' should has a int parameter after it.,-p a",
+      "the flag 'd' should has a string parameter after it.,-d",
   })
   void should_throw_invalid_parameter_exception(String expected, String command) {
     InvalidParameterException exception = assertThrows(InvalidParameterException.class, () -> args.parse(command));
