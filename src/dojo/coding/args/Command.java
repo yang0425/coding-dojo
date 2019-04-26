@@ -9,8 +9,14 @@ public class Command {
   }
 
   String getFlag() {
-    char flag = this.value.charAt(1);
-    consumeValue(2);
+    char flag;
+    if (value.startsWith("-")) {
+      flag = this.value.charAt(1);
+      consumeValue(2);
+    } else {
+      flag = this.value.charAt(2);
+      consumeValue(3);
+    }
     return String.valueOf(flag);
   }
 
